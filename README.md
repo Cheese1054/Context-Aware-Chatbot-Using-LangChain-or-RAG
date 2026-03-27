@@ -1,20 +1,29 @@
-🎯 Objective
-Design and implement a context-aware chatbot that uses Retrieval-Augmented Generation (RAG) principles via LangChain — allowing the bot to answer questions grounded in a custom knowledge base rather than relying solely on a base language model.
 
-🛠️ Methodology / Approach
-Leveraged LangChain as the orchestration framework to chain together retrieval and generation steps.
-Built a document ingestion pipeline: text documents are split into chunks, converted to vector embeddings, and stored in a vector store.
-On each user query, the most relevant document chunks are retrieved and injected into the prompt context (RAG pattern).
-The language model then generates a response grounded in those retrieved passages — reducing hallucinations and enabling domain-specific Q&A.
-Maintained conversation memory across turns so the chatbot is context-aware throughout a session.
-📊 Key Results / Observations
-The RAG approach significantly improves answer accuracy compared to a plain LLM with no retrieval.
-Context window management (chunking strategy, overlap) proved critical for coherent multi-turn conversations.
-The architecture is modular: the vector store, LLM, and retriever can each be swapped independently (e.g., FAISS → Pinecone, OpenAI → local model).
-🗂️ Repository Structure
-├── Task_2_End_to_End_ML_Pipeline_for_Customer_Churn_Prediction.ipynb
-├── Task_3_Multimodal_Housing_Price_Prediction__Images___Tabular_.ipynb
-├── Task_4_Context_Aware_Chatbot_Using_LangChain_RAG.ipynb
-└── README.md
-🧰 Tech Stack
-Python · scikit-learn · TensorFlow / Keras · LangChain · OpenCV · pandas · NumPy · joblib
+## 📌 Project Overview
+This project implements a **Multimodal Deep Learning** model using TensorFlow and Keras to predict real estate prices. Unlike traditional models that only use numerical data, this approach combines:
+1.  **Tabular Data:** Structural features like square footage, bedrooms, and age.
+2.  **Image Features:** Visual data (simulated as 512-dimensional vectors) representing the aesthetic or condition of the property.
+
+The architecture uses a **Late Fusion** technique, where two separate neural network branches are trained independently and then concatenated to make a final price prediction.
+
+---
+
+## 🏗️ Model Architecture
+The model consists of two main input branches:
+
+### 1. Tabular Branch
+* **Input:** 5 numerical features (`area_sqft`, `bedrooms`, `bathrooms`, `age_years`, `garage`).
+* **Structure:** Dense layers (128 → 64) with Dropout (0.3) to prevent overfitting.
+
+### 2. Image Branch
+* **Input:** 512-dimensional feature vector (representative of a CNN output like VGG16).
+* **Structure:** Dense layers (256 → 128) with Dropout (0.3).
+
+### 3. Fusion & Output
+* **Merge:** Concatenation of both branches.
+* **Head:** Dense layers (128 → 64) leading to a single linear output for regression.
+
+
+
+```bash
+pip install numpy pandas tensorflow scikit-learn matplotlib pillow opencv-python joblib
